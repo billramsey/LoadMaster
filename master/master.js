@@ -3,11 +3,19 @@
 // Dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
+const environment = require('dotenv');
+
+// Set environment variables file
+if (process.env.NODE_ENV === 'development') {
+  environment.config({ path: './env/development.env' });
+} else if (process.env.NODE_ENV === 'production') {
+  environment.config({ path: './env/production.env' });
+}
 
 // Modules
 const masterController = require('./master_controller.js');
 
-// DEPENDENCY: [TODO] Need to update with correct port number
+// Variables: [TODO] Need to update with correct port number
 const port = process.env.port || 8000;
 
 // Start Express Server
