@@ -12,16 +12,19 @@ CURRENT MVP IMPLEMENTATION SPECIFICATIONS
 
 // ASSUMPTIONS
 const tasksPerJob = 10; // Arbitrary number of actions per job
+// TODO - Fill this in
+const webServerIP = 'CHRIS TO PROVIDE';
 
 // Dependencies
-const dockerConnection = require('../config/docker-config');
-const util = require('../helper/utils');
+const request = require('request');
 
 // Modules
 const Queue = require('../helper/queue');
 const divide = require('..//helper/divide');
 const helpers = require('../helper/helpers');
 const Scenario = require('../models/ScenariosModel');
+const util = require('../helper/utils');
+const dockerConnection = require('../config/docker-config');
 
 // Global Variables
 const jobQueue = new Queue();
@@ -29,7 +32,6 @@ const status = {
   workerCount: 0,
 };
 let results = [];
-let currentResultAverage = 0;
 let currentscenarioID;
 let currentUser;
 let totalJobs = 0;
@@ -41,15 +43,12 @@ const handleJobFromWebServer = (req, res) => {
   currentUser = req.body.id_user;
 
   const task = {
-    // TODO: Verify Scenario ID is correctly sent
     scenarioID: req.body.scenarioID,
     scenario: req.body.scenarioName,
     user: req.body.id_user,
     targetUrl: req.body.targetUrl,
     script: req.body.script,
   };
-
-  // TODO: Get scenario ID and pass onto task
 
   // Split up jobs into chunks and place into job queue
   const spawnCount = +req.body.spawnCount;
@@ -67,15 +66,14 @@ const handleJobFromWebServer = (req, res) => {
 
   // Wind up number of requested workers
   const workers = req.body.workers;
-  // TODO: CHRIS TO PROVIDE CODE TO WIND UP WORKERS
   for (let j = 1; j <= workers; j++) {
     status.workerCount = j;
     const workerName = 'worker'.concat(status.workerCount);
-    console.log('creating ' + workerName);
+    console.log(`creating ${workerName}`);
     util.createContainer(dockerConnection, 'node-sender', workerName);
   }
 
-  res.status(201).send('webserver post request received for ' + workers + ' workers');
+  res.status(201).send(`webserver post request received for ${workers} workers`);
 };
 
 const complete = (req, res) => {
@@ -105,7 +103,13 @@ const complete = (req, res) => {
   if (results.length === totalJobs) {
     console.log('We are done!');
 
-    // TODO do post request with results to the web server
+    // There may be no point in sending all the results to the web server
+    // Post request with results to the web server
+    request.post({
+      url: webServerIP,
+      json: true,
+      body: results,
+    });
 
     let totalTime = 0;
     const resultLength = results.length;
@@ -113,7 +117,7 @@ const complete = (req, res) => {
       totalTime += results[k].scenarioTime;
     }
     const averageTime = totalTime / resultLength;
-    // Get specific scenario from the database
+    // Update scenario info from the database
     Scenario.where({ scenarioID: currentscenarioID, id_user: currentUser })
       .save({ averageActionTime: averageTime });
   }
