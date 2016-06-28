@@ -12,7 +12,7 @@ const Queue = class Queue {
     return this.items.length;
   }
   takeNext() {
-    return this.items.splice(0, 1);
+    return this.items.splice(0, 1)[0];
   }
 };
 
