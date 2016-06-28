@@ -5,6 +5,7 @@
   "main": "master.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon master/master.js",
+    "start_prod": "NODE_ENV=production nodemon master/master.js",
     "test": "NODE_ENV=development mocha --reporter nyan tests/testSetup.js \"tests/**/**/*.spec.js\""
   },
   "repository": {
