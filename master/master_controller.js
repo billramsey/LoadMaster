@@ -70,7 +70,7 @@ const handleJobFromWebServer = (req, res) => {
     status.workerCount = j;
     const workerName = 'worker'.concat(status.workerCount);
     console.log(`creating ${workerName}`);
-    util.createContainer(dockerConnection, 'node-sender', workerName);
+    util.createContainer(dockerConnection, 'cshg/loadworker', workerName);
   }
 
   res.status(201).send(`webserver post request received for ${workers} workers`);
