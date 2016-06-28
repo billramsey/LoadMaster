@@ -12,4 +12,4 @@ COPY . /src
 
 EXPOSE 1000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "start_prod"]
