@@ -41,6 +41,7 @@ app.listen(app.get('port'), () => {
 });
 
 const webserverUrl = process.env.PROTOCOL + process.env.WEB_PORT_8000_TCP_ADDR + ':' + process.env.WEB_PORT + '/api/scenarios';
+console.log('webserverUrl', webserverUrl);
 
 request.get(webserverUrl, (error, response, body) => {
   if (error) {
