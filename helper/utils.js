@@ -3,13 +3,13 @@ const sendJSON = (res, status, content) => {
   res.json(content);
 };
 
-const createContainer = (dockerConnection, imageName, containerName) => {
+const createContainer = (dockerConnection, masterName, imageName, containerName) => {
   dockerConnection.createContainer(
     {
       Image: imageName,
       name: containerName,
       HostConfig: {
-        Links: ["mysql:mysql", "master:masterhost"],
+        Links: ["mysql:mysql", masterName + ":masterhost"],
       },
     },
     (connectErr, container) => {

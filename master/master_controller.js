@@ -43,6 +43,7 @@ const handleJobFromWebServer = (req, res) => {
   currentUser = req.body.id_user;
 
   const task = {
+    masterName: req.body.masterName,
     scenarioID: req.body.scenarioID,
     scenario: req.body.scenarioName,
     user: req.body.id_user,
@@ -72,7 +73,7 @@ const handleJobFromWebServer = (req, res) => {
     status.workerCount = j;
     const workerName = 'worker'.concat(status.workerCount);
     console.log(`creating ${workerName}`);
-    util.createContainer(dockerConnection, 'cshg/loadworker', workerName);
+    util.createContainer(dockerConnection, task.masterName, 'cshg/loadworker', workerName);
   }
 
   res.status(201).send(`webserver post request received for ${workers} workers`);
