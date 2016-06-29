@@ -54,7 +54,7 @@ const handleJobFromWebServer = (req, res) => {
   console.log('task received', task);
 
   // Split up jobs into chunks and place into job queue
-  const spawnCount = +req.body.spawnCount;
+  const spawnCount = +req.body.spawnsCount;
   totalJobs = spawnCount;
 
   const jobsToAdd = divide(spawnCount, tasksPerJob);
