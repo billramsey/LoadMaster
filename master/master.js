@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'development') {
 const masterController = require('./master_controller.js');
 
 // Variables: [TODO] Need to update with correct port number
-const port = process.env.port || 8000;
+const port = process.env.PORT || 2000;
 
 // Start Express Server
 const app = express();

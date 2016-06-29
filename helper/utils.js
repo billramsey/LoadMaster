@@ -9,7 +9,7 @@ const createContainer = (dockerConnection, imageName, containerName) => {
       Image: imageName,
       name: containerName,
       HostConfig: {
-        Links: ["mysql:mysql", "master:masterHost"],
+        Links: ["mysql:mysql", "master:masterhost"],
       },
     },
     (connectErr, container) => {
