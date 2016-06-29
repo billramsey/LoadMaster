@@ -47,7 +47,7 @@ const handleJobFromWebServer = (req, res) => {
     scenarioID: req.body.scenarioID,
     scenario: req.body.scenarioName,
     user: req.body.id_user,
-    targetUrl: req.body.targetUrl,
+    targetURL: req.body.targetURL,
     script: req.body.script,
   };
 
@@ -76,7 +76,7 @@ const handleJobFromWebServer = (req, res) => {
     util.createContainer(dockerConnection, task.masterName, 'cshg/loadworker', workerName);
   }
 
-  res.status(201).send(`webserver post request received for ${workers} workers`);
+  res.status(200).send(`webserver post request received for ${workers} workers`);
 };
 
 const complete = (req, res) => {
@@ -132,10 +132,10 @@ const requestJob = (req, res) => {
   // Check if jobs are available
   if (jobQueue.checkLength() > 0) {
     const job = jobQueue.takeNext();
-    res.json({ job });
+    res.status(200).json({ job });
   } else {
     // If no jobs available send 0
-    res.send('done');
+    res.status(200).send('done');
   }
 };
 

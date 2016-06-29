@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const expect = require('chai').expect;
-const Queue = require('../queue');
+const Queue = require('../helper/queue');
 
 describe('Queue', () => {
   // Adds item to queue
