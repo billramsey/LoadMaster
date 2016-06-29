@@ -10,6 +10,6 @@ RUN npm install
 
 COPY . /src
 
-EXPOSE 1000
+EXPOSE 2000
 
 CMD ["npm", "run", "start_prod"]
