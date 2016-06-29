@@ -3,7 +3,6 @@
 // Dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
-const request = require('request');
 const environment = require('dotenv');
 
 // Set environment variables file
@@ -38,15 +37,4 @@ app.post('/api/complete', masterController.complete);
 // Server listens at specified port
 app.listen(app.get('port'), () => {
   console.log(`Master server listening to port ${app.get('port')}`);
-});
-
-const webserverUrl = process.env.PROTOCOL + process.env.WEB_PORT_8000_TCP_ADDR + ':' + process.env.WEB_PORT + '/api/scenarios';
-console.log('webserverUrl', webserverUrl);
-
-request.get(webserverUrl, (error, response, body) => {
-  if (error) {
-    console.log(error);
-  }
-  console.log('body', body);
-  console.log('response', response);
 });
