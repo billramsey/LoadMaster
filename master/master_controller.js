@@ -50,6 +50,8 @@ const handleJobFromWebServer = (req, res) => {
     script: req.body.script,
   };
 
+  console.log('task received', task);
+
   // Split up jobs into chunks and place into job queue
   const spawnCount = +req.body.spawnCount;
   totalJobs = spawnCount;
@@ -70,7 +72,7 @@ const handleJobFromWebServer = (req, res) => {
     status.workerCount = j;
     const workerName = 'worker'.concat(status.workerCount);
     console.log(`creating ${workerName}`);
-    util.createContainer(dockerConnection, 'node-sender', workerName);
+    util.createContainer(dockerConnection, 'cshg/loadworker', workerName);
   }
 
   res.status(201).send(`webserver post request received for ${workers} workers`);
