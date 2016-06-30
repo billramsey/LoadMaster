@@ -47,7 +47,7 @@ const handleJobFromWebServer = (req, res) => {
     scenarioID: req.body.scenarioID,
     scenario: req.body.scenarioName,
     user: req.body.id_user,
-    targetURL: req.body.targetURL,
+    targetUrl: req.body.targetURL,
     script: req.body.script,
   };
 
