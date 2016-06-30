@@ -13,7 +13,7 @@ CURRENT MVP IMPLEMENTATION SPECIFICATIONS
 // ASSUMPTIONS
 const tasksPerJob = 10; // Arbitrary number of actions per job
 // TODO - Fill this in
-const webServerIP = 'CHRIS TO PROVIDE';
+const webServerUrl = process.env.PROTOCOL + process.env.WEB_PORT_8000_TCP_ADDR + ':' + process.env.WEB_PORT_8000_TCP_PORT;
 
 // Dependencies
 const request = require('request');
@@ -71,7 +71,7 @@ const handleJobFromWebServer = (req, res) => {
   const workers = req.body.workers;
   for (let j = 1; j <= workers; j++) {
     status.workerCount = j;
-    const workerName = 'worker'.concat(status.workerCount);
+    const workerName = task.masterName.concat('worker'.concat(status.workerCount));
     console.log(`creating ${workerName}`);
     util.createContainer(dockerConnection, task.masterName, 'cshg/loadworker', workerName);
   }
@@ -109,7 +109,7 @@ const complete = (req, res) => {
     // There may be no point in sending all the results to the web server
     // Post request with results to the web server
     request.post({
-      url: webServerIP,
+      url: webServerUrl,
       json: true,
       body: results,
     });
