@@ -75,8 +75,9 @@ const handleJobFromWebServer = (req, res) => {
     console.log(`creating ${workerName}`);
     util.createContainer(dockerConnection, task.masterName, 'cshg/loadworker', workerName);
   }
-
-  res.status(200).send(`webserver post request received for ${workers} workers`);
+  if (res) {
+    res.status(200).send(`webserver post request received for ${workers} workers`);
+  }
 };
 
 const complete = (req, res) => {

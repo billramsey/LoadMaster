@@ -38,3 +38,19 @@ app.post('/api/complete', masterController.complete);
 app.listen(app.get('port'), () => {
   console.log(`Master server listening to port ${app.get('port')}`);
 });
+
+if (process.env.NODE_ENV === 'development') {
+  // Mock request data
+  const request = {};
+  request.body = {
+    masterName: 'master1',
+    scenarioID: 1,
+    scenarioName: 'test1',
+    id_user: 1,
+    spawnsCount: 20,
+    targetURL: 'http://localhost:2000',
+    script: "get('/');",
+  };
+  // Mock incoming request
+  masterController.handleJobFromWebServer(request);
+}
