@@ -45,8 +45,8 @@ if (process.env.NODE_ENV === 'development') {
   request.body = {
     masterName: 'master1',
     scenarioID: 1,
-    scenario: 'test1',
-    user: 1,
+    scenarioName: 'test1',
+    id_user: 1,
     spawnsCount: 20,
     targetURL: 'http://localhost:2000',
     script: "get('/');",
