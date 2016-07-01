@@ -11,7 +11,7 @@ CURRENT MVP IMPLEMENTATION SPECIFICATIONS
 */
 
 // ASSUMPTIONS
-const tasksPerJob = 10; // Arbitrary number of actions per job
+const tasksPerJob = 3; // Arbitrary number of actions per job
 // TODO - Fill this in
 const webServerUrl = process.env.PROTOCOL + process.env.WEB_PORT_8000_TCP_ADDR + ':' + process.env.WEB_PORT_8000_TCP_PORT;
 

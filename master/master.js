@@ -53,4 +53,19 @@ if (process.env.NODE_ENV === 'development') {
   };
   // Mock incoming request
   masterController.handleJobFromWebServer(request);
+} else if (process.env.NODE_ENV === 'production') {
+  // Mock request data
+  const request = {};
+  request.body = {
+    masterName: 'master1',
+    workers: 2,
+    scenarioID: 1,
+    scenarioName: 'test1',
+    id_user: 1,
+    spawnsCount: 10,
+    targetURL: 'http://45.55.183.145/',
+    script: "get('/');",
+  };
+  // Mock incoming request
+  masterController.handleJobFromWebServer(request);
 }
