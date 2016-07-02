@@ -9,6 +9,7 @@ const createContainer = (dockerConnection, masterName, imageName, containerName)
       Image: imageName,
       name: containerName,
       HostConfig: {
+        Binds: ["/env:/env"],
         Links: ["mysql:mysql", masterName + ":masterhost"],
       },
     },
