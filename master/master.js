@@ -9,7 +9,7 @@ const environment = require('dotenv');
 if (process.env.NODE_ENV === 'development') {
   environment.config({ path: './env/development.env' });
 } else if (process.env.NODE_ENV === 'production') {
-  environment.config({ path: './env/production.env' });
+  environment.config({ path: '../env/production.env' });
 }
 
 // Modules
