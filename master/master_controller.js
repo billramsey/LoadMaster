@@ -81,9 +81,9 @@ const handleJobFromWebServer = (req, res) => {
 };
 
 const complete = (req, res) => {
-  console.log('Received POST complete request!', req.body);
+  // console.log('Received POST complete request!', req.body);
   // Add to completed jobs list
-  console.log('This is results before the concat', results);
+  // console.log('This is results before the concat', results);
   results = results.concat(req.body);
   /*
   [
@@ -108,22 +108,25 @@ const complete = (req, res) => {
     console.log('We are done!');
 
     // There may be no point in sending all the results to the web server
-    // Post request with results to the web server
-    request.post({
-      url: webServerUrl,
-      json: true,
-      body: results,
-    });
 
-    let totalTime = 0;
-    const resultLength = results.length;
-    for (let k = 0; k < results.length; k++) {
-      totalTime += results[k].scenarioTime;
-    }
-    const averageTime = totalTime / resultLength;
     // Update scenario info from the database
-    Scenario.where({ scenarioID: currentscenarioID, id_user: currentUser })
-      .save({ averageActionTime: averageTime });
+
+    // request.post({
+    //   url: webServerIP,
+    //   json: true,
+    //   body: results,
+    // });
+
+    // REFACTOR: Remove this code.
+    // let totalTime = 0;
+    // const resultLength = results.length;
+    // for (let k = 0; k < results.length; k++) {
+    //   totalTime += results[k].scenarioTime;
+    // }
+    // const averageTime = totalTime / resultLength;
+    // // Update scenario info from the database
+    // Scenario.where({ scenarioID: currentscenarioID, id_user: currentUser })
+    //   .save({ averageActionTime: averageTime });
   }
   res.status(200).send();
 };
