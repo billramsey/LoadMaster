@@ -9,6 +9,7 @@ db.knex.schema.hasTable('users').then(exists => {
       user.increments('id').primary();
       user.string('email', 255).unique();
       user.string('name', 255);
+      user.string('siteToken', 255);
       user.string('hash', 255);
       user.string('salt', 255);
       user.timestamps();
