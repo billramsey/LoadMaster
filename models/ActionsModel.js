@@ -5,10 +5,12 @@ db.knex.schema.hasTable('actions').then(exists => {
   if (!exists) {
     db.knex.schema.createTable('actions', action => {
       action.increments('id').primary();
-      action.string('actionName', 255).unique();
+      action.string('actionTaken', 255);
+      action.string('path', 255);
       action.integer('statusCode', 255);
-      action.integer('elapsedTime', 255);
+      action.integer('elapsedTimeAction', 255);
       action.integer('id_scenario', 255);
+      action.string('httpVerb', 255);
       action.timestamps();
     }).then(table => {
       console.log('Actions table has been created.', table);
