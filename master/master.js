@@ -46,10 +46,10 @@ if (process.env.NODE_ENV === 'development') {
     masterName: 'master1',
     scenarioID: 1,
     scenarioName: 'test1',
-    id_user: 1,
+    id_user: 2,
     spawnsCount: 20,
-    targetURL: 'http://localhost:2000',
-    script: "get('/');",
+    targetURL: 'http://localhost:3000',
+    script: "get /",
   };
   // Mock incoming request
   masterController.handleJobFromWebServer(request);
