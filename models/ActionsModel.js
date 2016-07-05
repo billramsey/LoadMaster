@@ -1,6 +1,7 @@
 const db = require('../config/db');
 const Scenario = require('./ScenariosModel');
 
+//  merged
 db.knex.schema.hasTable('actions').then(exists => {
   if (!exists) {
     db.knex.schema.createTable('actions', action => {
@@ -17,7 +18,6 @@ db.knex.schema.hasTable('actions').then(exists => {
     });
   }
 });
-
 const Action = db.Model.extend({
   tableName: 'actions',
   hasTimeStamps: true,
